@@ -11,24 +11,12 @@ def banner():
     ░███    ░███  ░███    ░███  ░███  ░░█████ ░░███  ░░███  ░███      ░███  ░███    ░███  ░███  ░░█████    ░░███  ░░███  ░███    ░███  ░███      ░███  ░███ ░   █
     █████   █████ █████   █████ █████  ░░█████ ░░█████████  █████     █████ █████   █████ █████  ░░█████    ░░█████████  █████   █████ █████     █████ ██████████
     ░░░░░   ░░░░░ ░░░░░   ░░░░░ ░░░░░    ░░░░░   ░░░░░░░░░  ░░░░░     ░░░░░ ░░░░░   ░░░░░ ░░░░░    ░░░░░      ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░     ░░░░░ ░░░░░░░░░░ 
-                                                                                                                     
+                                                                    by Erick Mantilla
+                                                                        ermabo892                                                                                                                
                                                                                                                                                               
     """)
 
-def menu():
-    banner()
-    menu_selection = input("""
-    Elija una opcion:
-
-    1. Jugar
-    2. ver palabras
-    3. Anadir palabra
-    4. Eliminar palabra
-    5. salir
-    
-    """)
-
-        
+  
         
 
 
@@ -54,7 +42,10 @@ def remove_word(word):
             f.write(string)
             f.write("\n")
 
-
+def menu():
+    os.system("cls")
+    banner()
+    
 
 # Seleccionar palabra aleatoria 
 def selected_word(data):
@@ -63,8 +54,11 @@ def selected_word(data):
     
 
 def run():
-    data=open_file()
-    menu_selection = input("""
+    while True:
+        data=open_file()
+        menu()
+        print(
+    """
     Elija una opcion:
 
     1. Jugar
@@ -74,48 +68,75 @@ def run():
     5. salir
     
     """)
-    if menu_selection == "1":
-        
-        word=selected_word(data)
-        secret_word=["-" for i in range(len(word))]
-        #    secret.append("-")
-        counter=0
-        puerta=True
-        while puerta:
-            os.system ("cls")
-            banner()        
-            print("adivina la palabra!")
-            print(*secret_word)
-            entrada=input("ingrese una letra ").lower()
-            for i in range(len(word)):
-                if entrada == word[i]:
-                    secret_word[i]=entrada
-            for j, chars in enumerate(secret_word):
-                if word[j] == chars:
-                    counter+=1
-                    if counter == (len(word)):
-                        os.system ("cls")
-                        print(*secret_word)
-                        puerta=False
-            counter=0
-                    
-        print("Ganaste, la palabra secreta era " + word)
-    
-    elif menu_selection == "2":
-        data.sort()
-        for i in range(len(data)):
-            print(data[i], end=", ")
-            if i % 10 == 0 and i > 1:
-                print("")
-    
-    elif menu_selection == "3":
-        add_word(input("ingrese nueva palabra: "))
-
-    elif menu_selection == "4":
-        remove_word(input("Digite palabra a eliminar: "))
+        menu_selection = input("Selecciona la opcion deseada: ")
+        if menu_selection == "1":
             
-    else:
-        exit()
+            word=selected_word(data)
+            secret_word=["-" for i in range(len(word))]
+            #    secret.append("-")
+            counter=0
+            puerta=True
+            while puerta:
+                os.system ("cls")
+                banner()        
+                print("adivina la palabra!")
+                print(*secret_word)
+                entrada=input("ingrese una letra ")
+                for i in range(len(word)):
+                    if entrada == word[i]:
+                        secret_word[i]=entrada
+                for j, chars in enumerate(secret_word):
+                    if word[j] == chars:
+                        counter+=1
+                        if counter == (len(word)):
+                            os.system ("cls")
+                            banner() 
+                            print(*secret_word)
+                            print("Ganaste, la palabra secreta era " + word + "!!")
+                            input("Presione una tecla para continuar...")
+                            puerta=False
+
+                counter=0
+
+                        
+            
+
+#---------------------------------------------------------------------------------------------- 
+        
+        elif menu_selection == "2":
+            menu()
+            print("palabras existentes en la base de datos: \n")
+            data.sort()
+            for i in range(len(data)):
+                print(data[i], end=", ")
+                if i % 10 == 0 and i > 1:
+                    print("")
+            print()
+            print("----------------------------------------------------------------------------------------")
+            input("Presione cualquier tecla para continuar: ")
+
+#---------------------------------------------------------------------------------------------- 
+
+        elif menu_selection == "3":
+            menu()
+            add_word(input("ingrese nueva palabra: "))
+            print("palabra agregada con exito")
+            input("presione cualquier tecla para continuar: ")
+#---------------------------------------------------------------------------------------------- 
+        
+        elif menu_selection == "4":
+            menu()
+            remove_word(input("Digite palabra a eliminar: "))
+            print("palabra eliminada con exito")
+            input("presione cualquier tecla para continuar: ")
+
+#----------------------------------------------------------------------------------------------                 
+        
+        else:
+            os.system("cls")
+            exit()
+            
+
 
     
 
