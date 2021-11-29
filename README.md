@@ -28,5 +28,8 @@
 ![1](https://user-images.githubusercontent.com/91839905/143729919-f965f394-e9ae-46df-adc5-99c29e803485.jpeg)
 ![2](https://user-images.githubusercontent.com/91839905/143730041-ffac5d30-a921-4241-83b8-41245a32f58c.jpeg)
 
-
+# hangman-ahorcado V-2.1
+- Menu validation added
+- Accents validation added
+- Try and except validation
 
